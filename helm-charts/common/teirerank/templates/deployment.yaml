@@ -58,7 +58,7 @@ spec:
       volumes:
         - name: model-volume
           persistentVolumeClaim:
-            claimName: myclaim
+            claimName: {{ include "teirerank.fullname" . }}-pvc
           #hostPath:
           #  path: {{ .Values.global.volume }}
           #  type: Directory

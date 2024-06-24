@@ -9,8 +9,6 @@ securityContext:
     type: RuntimeDefault
 
 llm-uservice:
-  image:
-    repository: 10.239.241.221:5000/opea/llm-tgi:latest
   securityContext:
     allowPrivilegeEscalation: false
     runAsNonRoot: true
@@ -21,7 +19,8 @@ llm-uservice:
     seccompProfile:
       type: RuntimeDefault
   tgi:
-    LLM_MODEL_ID: raincandy-u/TinyStories-656K
+    #LLM_MODEL_ID: raincandy-u/TinyStories-656K
+    LLM_MODEL_ID: /data/Magicoder-S-DS-6.7B
     securityContext:
       allowPrivilegeEscalation: false
       runAsNonRoot: true
@@ -33,9 +32,10 @@ llm-uservice:
         type: RuntimeDefault
 
 # the following is for debugging purpose
-image:
-  repository: 10.239.241.221:5000/opea/codegen:latest
 service:
   type: NodePort
 global:
   HUGGINGFACEHUB_API_TOKEN: "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"
+  no_proxy: "intel.com,.intel.com,10.0.0.0/8,192.168.0.0/16,localhost,127.0.0.0/8,134.134.0.0/16,10.238.154.145,192.168.1.3,192.168.1.253,codegen-tgi,codegen-llm-uservice"
+  https_proxy: http://192.168.1.253:3128
+  http_proxy: http://192.168.1.253:3128

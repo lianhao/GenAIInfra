@@ -46,6 +46,10 @@ spec:
               value: {{ .Values.global.no_proxy }}
             - name: NUMBA_CACHE_DIR
               value: /tmp
+            - name: HABANA_LOGS
+              value: /tmp/habana_logs
+            - name: TRANSFORMERS_CACHE
+              value: /tmp
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -61,7 +65,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: model-volume
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: {{ include "tgi.fullname" . }}-pvc
           #hostPath:
           #  path: {{ .Values.global.volume }}
           #  type: Directory
