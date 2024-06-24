@@ -1,0 +1,116 @@
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+  seccompProfile:
+    type: RuntimeDefault
+
+llm-uservice:
+  image:
+    repository: 10.239.241.221:5000/opea/llm-tgi:latest
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  tgi:
+    LLM_MODEL_ID: raincandy-u/TinyStories-656K
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+reranking-usvc:
+  image:
+    repository: 10.239.241.221:5000/opea/reranking-tei:latest
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  teirerank:
+    sizeLimit: 512MBi
+    #RERANK_MODEL_ID: mixedbread-ai/mxbai-rerank-xsmall-v1
+    RERANK_MODEL_ID: /data/bge-reranker-base
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+embedding-usvc:
+  image:
+    repository: 10.239.241.221:5000/opea/embedding-tei:latest
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  tei:
+    sizeLimit: 512MBi
+    EMBEDDING_MODEL_ID: thenlper/gte-base
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+retriever-usvc:
+  image:
+    repository: 10.239.241.221:5000/opea/retriever-redis:latest
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  redis-vector-db:
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+
+# the following is for debugging purpose
+image:
+  repository: 10.239.241.221:5000/opea/chatqna:latest
+service:
+  type: NodePort
+global:
+  HUGGINGFACEHUB_API_TOKEN: "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"

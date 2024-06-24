@@ -33,7 +33,7 @@ spec:
             - name: MODEL_ID
               value: {{ .Values.RERANK_MODEL_ID | quote }}
             - name: PORT
-              value: "80"
+              value: {{ .Values.port | quote }}
             - name: http_proxy
               value: {{ .Values.global.http_proxy }}
             - name: https_proxy
@@ -51,15 +51,17 @@ spec:
               name: shm
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.port }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: model-volume
-          hostPath:
-            path: {{ .Values.global.volume }}
-            type: Directory
+          persistentVolumeClaim:
+            claimName: myclaim
+          #hostPath:
+          #  path: {{ .Values.global.volume }}
+          #  type: Directory
         - name: shm
           emptyDir:
             medium: Memory

@@ -1,0 +1,41 @@
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+  seccompProfile:
+    type: RuntimeDefault
+
+llm-uservice:
+  image:
+    repository: 10.239.241.221:5000/opea/llm-tgi:latest
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  tgi:
+    LLM_MODEL_ID: raincandy-u/TinyStories-656K
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      runAsUser: 1000
+      capabilities:
+        drop:
+        - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+# the following is for debugging purpose
+image:
+  repository: 10.239.241.221:5000/opea/codegen:latest
+service:
+  type: NodePort
+global:
+  HUGGINGFACEHUB_API_TOKEN: "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"
