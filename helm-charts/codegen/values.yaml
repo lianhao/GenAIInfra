@@ -60,6 +60,10 @@ affinity: {}
 tgi:
   LLM_MODEL_ID: Qwen/Qwen2.5-Coder-7B-Instruct
 
+llm-uservice:
+  DOCSUM_BACKEND: "TGI"
+  LLM_MODEL_ID: Qwen/Qwen2.5-Coder-7B-Instruct
+
 nginx:
   service:
     type: NodePort
