@@ -86,22 +86,25 @@ redis-vector-db:
 # Microservice layer, disabled by default
 llm-uservice:
   enabled: false
+  TEXTGEN_BACKEND: "TGI"
+  LLM_MODEL_ID: Intel/neural-chat-7b-v3-3
 embedding-usvc:
   enabled: false
+  EMBEDDING_BACKEND: "TEI"
 reranking-usvc:
   enabled: false
+  RERANK_BACKEND: "TEI"
 
 nginx:
   service:
     type: NodePort
 
-# If you would like to switch to traditional UI image
 # Uncomment the following lines
-# chatqna-ui:
-#   image:
-#     repository: opea/chatqna-ui
-#     tag: "latest"
-#   containerPort: "5173"
+chatqna-ui:
+  image:
+    repository: opea/chatqna-ui
+    tag: "latest"
+  containerPort: "5173"
 
 global:
   http_proxy: ""
