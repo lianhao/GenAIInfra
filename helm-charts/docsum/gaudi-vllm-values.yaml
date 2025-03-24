@@ -9,6 +9,7 @@ tgi:
 
 llm-uservice:
   DOCSUM_BACKEND: "vLLM"
+  retryTimeoutSeconds: 720
 
 vllm:
   enabled: true
@@ -19,18 +20,7 @@ vllm:
     limits:
       habana.ai/gaudi: 1
   startupProbe:
-    initialDelaySeconds: 5
-    periodSeconds: 5
-    timeoutSeconds: 1
-    failureThreshold: 120
-  readinessProbe:
-    initialDelaySeconds: 5
-    periodSeconds: 5
-    timeoutSeconds: 1
-  livenessProbe:
-    initialDelaySeconds: 5
-    periodSeconds: 5
-    timeoutSeconds: 1
+    failureThreshold: 360
 
   PT_HPU_ENABLE_LAZY_COLLECTIVES: "true"
   OMPI_MCA_btl_vader_single_copy_mechanism: "none"

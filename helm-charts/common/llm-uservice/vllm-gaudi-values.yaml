@@ -17,6 +17,9 @@ vllm:
   resources:
     limits:
       habana.ai/gaudi: 1
+  startupProbe:
+    failureThreshold: 360
 
 TEXTGEN_BACKEND: "vLLM"
 LLM_MODEL_ID: Intel/neural-chat-7b-v3-3
+retryTimeoutSeconds: 720

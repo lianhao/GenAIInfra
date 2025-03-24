@@ -13,6 +13,7 @@ chatqna:
   dest_dir: ChatQnA/kubernetes/helm
   values:
     - cpu-values.yaml
+    - cpu-qdrant-values.yaml
     - cpu-tgi-values.yaml
     - gaudi-vllm-values.yaml
     - gaudi-tgi-values.yaml
@@ -24,6 +25,7 @@ agentqna:
   dest_repo: GenAIExamples
   dest_dir: AgentQnA/kubernetes/helm
   values:
+    - cpu-values.yaml
     - gaudi-values.yaml
 audioqna:
   src_repo: GenAIInfra
@@ -32,7 +34,10 @@ audioqna:
   dest_dir: AudioQnA/kubernetes/helm
   values:
     - cpu-values.yaml
+    - cpu-tgi-values.yaml
+    - cpu-multilang-values.yaml
     - gaudi-values.yaml
+    - gaudi-tgi-values.yaml
 codegen:
   src_repo: GenAIInfra
   src_dir: helm-charts/codegen
@@ -120,6 +125,7 @@ data-prep:
   values:
     - milvus-values.yaml
     - redis-values.yaml
+    - qdrant-values.yaml
 embedding-usvc:
   src_repo: GenAIInfra
   src_dir: helm-charts/common/embedding-usvc
@@ -148,6 +154,8 @@ llm-uservice:
   dest_dir: comps/llms/deployment/kubernetes
   values:
     - cpu-values.yaml
+    - faq-values.yaml
+    - docsum-values.yaml
 lvm-uservice:
   src_repo: GenAIInfra
   src_dir: helm-charts/common/lvm-uservice
@@ -206,6 +214,7 @@ retriever-usvc:
   values:
     - milvus-values.yaml
     - redis-values.yaml
+    - qdrant-values.yaml
 speecht5:
   src_repo: GenAIInfra
   src_dir: helm-charts/common/speecht5
