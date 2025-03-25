@@ -66,3 +66,4 @@ data:
   NUMBA_CACHE_DIR: "/tmp/numba/cache"
   MPLCONFIGDIR: "/tmp/matplotlib"
   HAYSTACK_TELEMETRY_ENABLED: "False"
+  NLTK_DATA: "/home/user/nltk_data"
