@@ -88,6 +88,11 @@ spec:
               name: nltk-data
             - mountPath: /home/user/.config
               name: user-config-data
+            {{- if .Values.offline }}
+            - mountPath: /home/user/comps/dataprep/src/unstructuredio/yolo_x_layout
+              subPath: unstructuredio/yolo_x_layout
+              name: model-volume
+            {{- end }}
           {{- if .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
@@ -107,10 +112,31 @@ spec:
           emptyDir: {}
         - name: uploaded-files
           emptyDir: {}
-        - name: nltk-data
-          emptyDir: {}
         - name: user-config-data
           emptyDir: {}
+        - name: nltk-data
+          {{- if .Values.nltkDataUsePVC }}
+          claimName: {{ .Values.nltkDataUsePVC }}
+          {{- else if .Values.nltkDataUseHostPath }}
+          hostPath:
+            path: {{ .Values.nltkDataUseHostPath }}
+            type: Directory
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        {{- if .Values.offline }}
+        - name: model-volume
+          {{- if .Values.global.modelUsePVC }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.global.modelUsePVC }}
+          {{- else if .Values.global.modelUseHostPath }}
+          hostPath:
+            path: {{ .Values.global.modelUseHostPath }}
+            type: Directory
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

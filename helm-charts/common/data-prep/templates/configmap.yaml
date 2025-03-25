@@ -67,3 +67,4 @@ data:
   NUMBA_CACHE_DIR: "/tmp/numba/cache"
   XDG_CACHE_HOME: "/tmp/fontconfig/cache"
   MPLCONFIGDIR: "/tmp/matplotlib"
+  NLTK_DATA: "/home/user/nltk_data"
