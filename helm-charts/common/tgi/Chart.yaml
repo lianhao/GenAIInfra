@@ -11,4 +11,4 @@ dependencies:
     repository: "file://../commonlib"
 version: 0-latest
 # The HF TGI version
-appVersion: "2.1.0"
+appVersion: "2.4.1"

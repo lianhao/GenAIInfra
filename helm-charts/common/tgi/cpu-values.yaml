@@ -3,9 +3,6 @@
 
 # Resource requirements for Intel/neural-chat-7b-v3-3 @ 32-bit:
 resources:
-  limits:
-    cpu: 8
-    memory: 70Gi
   requests:
     cpu: 6
     memory: 65Gi

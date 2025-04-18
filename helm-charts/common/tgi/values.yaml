@@ -28,7 +28,7 @@ image:
   # Uncomment the following line to set desired image pull policy if needed, as one of Always, IfNotPresent, Never.
   # pullPolicy: ""
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "2.4.0-intel-cpu"
+  tag: "2.4.1-intel-cpu"
 
 # empty for CPU
 accelDevice: ""

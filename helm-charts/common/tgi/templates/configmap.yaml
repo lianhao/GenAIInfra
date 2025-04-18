@@ -24,6 +24,7 @@ data:
   NUMBA_CACHE_DIR: "/tmp"
   HUGGINGFACE_HUB_CACHE: "/data"
   HF_HOME: "/tmp/.cache/huggingface"
+  OUTLINES_CACHE_DIR: "/tmp/outlines_cache"
   {{- if .Values.MAX_INPUT_LENGTH }}
   MAX_INPUT_LENGTH: {{ .Values.MAX_INPUT_LENGTH | quote }}
   {{- end }}
