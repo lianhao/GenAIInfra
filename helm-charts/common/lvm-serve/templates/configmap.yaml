@@ -41,3 +41,6 @@ data:
   {{- if .Values.OMPI_MCA_btl_vader_single_copy_mechanism }}
   OMPI_MCA_btl_vader_single_copy_mechanism: {{ .Values.OMPI_MCA_btl_vader_single_copy_mechanism | quote}}
   {{- end }}
+  {{- if .Values.global.offline }}
+  HF_HUB_OFFLINE: "1"
+  {{- end }}

@@ -33,7 +33,7 @@ spec:
       serviceAccountName: {{ include "lvm-serve.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if and (not (hasPrefix "/data/" .Values.LVM_MODEL_ID)) (not (regexMatch "(lvm-video-llama|lvm-predictionguard)$" .Values.image.repository)) }}
+      {{- if and (not .Values.global.offline) (and (not (hasPrefix "/data/" .Values.LVM_MODEL_ID)) (not (regexMatch "(lvm-video-llama|lvm-predictionguard)$" .Values.image.repository))) }}
       initContainers:
         - name: model-downloader
           envFrom:
@@ -135,8 +135,10 @@ spec:
           hostPath:
             path: {{ .Values.global.modelUseHostPath }}
             type: Directory
-          {{- else }}
+          {{- else if not .Values.global.offline }}
           emptyDir: {}
+          {{- else }}
+          {{- fail "'global.modelUsePVC' or 'global.modelUseHostPath' must be set in offline mode" }}
           {{- end }}
         - name: tmp
           emptyDir: {}
